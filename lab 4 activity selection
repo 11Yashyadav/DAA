@@ -1,0 +1,38 @@
+#include<stdio.h> 
+struct activity{ 
+    int activity_num; 
+    int start_time; 
+    int end_time; 
+}; 
+void main(){ 
+    int i,j,no_activity; 
+    printf("Enter Number of Activities: "); 
+    scanf("%d",&no_activity); 
+    struct activity act[no_activity]; 
+    for(i = 0;i < no_activity;i++){ 
+        printf("Enter Start and End Time of Activity No. %d: ",i+1); 
+        scanf("%d%d",&act[i].start_time,&act[i].end_time); 
+        act[i].activity_num = i+1; 
+    } 
+    for(i = 0;i < no_activity;i++){ 
+        for(j = 0;j < no_activity - i - 1;j++){ 
+            if(act[j].end_time > act[j+1].end_time){ 
+                struct activity tmp = act[j]; 
+                act[j] = act[j+1]; 
+                act[j+1] = tmp; 
+            } 
+        } 
+    } 
+    j = 0; 
+    int seq[no_activity]; 
+    seq[0] = 0; 
+    for(i = 1;i < no_activity;i++){ 
+        if(act[seq[j]].end_time <= act[i].start_time){ 
+            seq[++j] = i; 
+        } 
+    } 
+    printf("\nSequence: "); 
+    for(i = 0;i <= j;i++){ 
+        printf("%d ",act[seq[i]].activity_num); 
+    } 
+} 
