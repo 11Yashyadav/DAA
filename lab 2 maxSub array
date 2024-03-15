@@ -1,0 +1,24 @@
+#include <stdio.h>
+int arr[100];
+int maxSubArray(int arr[], int size) {
+int maxEnd=arr[0];
+int maxF= arr[0];
+int i;
+for (i = 1 ; i < size; i++) {
+maxEnd =(maxEnd+arr[i] >arr[i]) ? maxEnd + arr[i]: arr[i] ;
+maxF= (maxEnd > maxF)? maxEnd : maxF;
+}
+return maxF;
+}
+int main() {
+int i, n;
+ printf ("\nPlease enter the size of array : ");
+ scanf ("%d",&n);
+ printf ("Enter the elements in array : \n");
+ for (i=1;i<=n;i++)
+  scanf ("%d",&arr[i]);
+int size = sizeof(arr) / sizeof(arr[0]);
+int result = maxSubArray(arr, size);
+printf("Maximum subarray sum: %d\n", result);
+return 0;
+}
